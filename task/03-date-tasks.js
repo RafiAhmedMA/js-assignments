@@ -22,7 +22,7 @@
  *    'Sun, 17 May 1998 03:00:00 GMT+01' => Date()
  */
 function parseDataFromRfc2822(value) {
-   throw new Error('Not implemented');
+   return Date.parse(value);
 }
 
 /**
@@ -37,7 +37,7 @@ function parseDataFromRfc2822(value) {
  *    '2016-01-19T08:07:37Z' => Date()
  */
 function parseDataFromIso8601(value) {
-   throw new Error('Not implemented');
+   return Date.parse(value);
 }
 
 
@@ -56,7 +56,8 @@ function parseDataFromIso8601(value) {
  *    Date(2015,1,1)    => false
  */
 function isLeapYear(date) {
-   throw new Error('Not implemented');
+   var year = date.getFullYear();
+   return ((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0);
 }
 
 
@@ -76,7 +77,18 @@ function isLeapYear(date) {
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,15,20,10,453)   => "05:20:10.453"
  */
 function timeSpanToString(startDate, endDate) {
-   throw new Error('Not implemented');
+   
+   var diff = Math.abs(startDate - endDate);
+   var ms = diff % 1000;
+   diff = (diff - ms) / 1000
+   var ss = diff % 60;
+   diff = (diff - ss) / 60
+   var mm = diff % 60;
+   diff = (diff - mm) / 60
+   var hh = diff % 24;
+   var days = (diff - hh) / 24
+
+   return hh.toString().padStart(2,'0')+":"+mm.toString().padStart(2,'0')+":"+ss.toString().padStart(2,'0')+"."+ms.toString().padStart(3,'0');
 }
 
 
@@ -94,7 +106,27 @@ function timeSpanToString(startDate, endDate) {
  *    Date.UTC(2016,3,5,21, 0) => Math.PI/2
  */
 function angleBetweenClockHands(date) {
-    throw new Error('Not implemented');
+
+   throw new Error('Not implemented');
+
+   var hour = date.getHours();
+   var minute = date.getMinutes();
+
+   // first workout the minute angle
+   var minAngle = 360*(minute/60);
+   // then work out hour angle
+   // first the hour then the hour + mins
+   var hourAngle = (360*(hour/12))+((360/12)*(minute/60));
+   console.log("minute angle = " + minAngle);
+   console.log("hour angle = " + hourAngle);
+   //if minute angle greater than hour angle
+   if(minAngle > hourAngle) {
+         return minAngle - hourAngle;
+   }
+   //if minute angle less than minute angle
+   else {
+         return hourAngle - minAngle;
+   }
 }
 
 
