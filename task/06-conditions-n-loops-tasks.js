@@ -46,7 +46,16 @@ function getFizzBuzz(num) {
  *   10 => 3628800
  */
 function getFactorial(n) {
-    throw new Error('Not implemented');
+    function factorialize(num) {
+        if (num < 0) 
+              return -1;
+        else if (num == 0) 
+            return 1;
+        else {
+            return (num * factorialize(num - 1));
+        }
+      }
+     return factorialize(n);
 }
 
 
@@ -63,7 +72,10 @@ function getFactorial(n) {
  *   -1,1  =>  0  ( = -1 + 0 + 1 )
  */
 function getSumBetweenNumbers(n1, n2) {
-    throw new Error('Not implemented');
+    function sumAll(min, max) {
+        return ((max-min)+1) * (min + max) / 2;
+    }
+    return sumAll(n1,n2);
 }
 
 
@@ -82,7 +94,15 @@ function getSumBetweenNumbers(n1, n2) {
  *   10,10,10 =>  true
  */
 function isTriangle(a,b,c) {
-    throw new Error('Not implemented');
+    function checkValidity(a,b,c) 
+{ 
+    // check condition 
+    if (a + b <= c || a + c <= b || b + c <= a) 
+        return false; 
+    else
+        return true; 
+} 
+return checkValidity(a,b,c);
 }
 
 
@@ -120,6 +140,23 @@ function isTriangle(a,b,c) {
  */
 function doRectanglesOverlap(rect1, rect2) {
     throw new Error('Not implemented');
+
+    function areRectanglesOverlap(rect1, rect2)
+     {
+        let [left1, top1, right1, bottom1] = [rect1[0], rect1[1], rect1[2], rect1[3]],
+            [left2, top2, right2, bottom2] = [rect2[0], rect2[1], rect2[2], rect2[3]];
+        // The first rectangle is under the second or vice versa
+        if (top1 < bottom2 || top2 < bottom1) {
+          return false;
+        }
+        // The first rectangle is to the left of the second or vice versa
+        if (right1 < left2 || right2 < left1) {
+          return false;
+        }
+        // Rectangles overlap
+        return true;
+      }
+      return areRectanglesOverlap(rect1, rect2);
 }
 
 
@@ -166,7 +203,16 @@ function isInsideCircle(circle, point) {
  *   'entente' => null
  */
 function findFirstSingleChar(str) {
-    throw new Error('Not implemented');
+    function firstNonRepeatedCharacter(string) {
+        for (var i = 0; i < string.length; i++) {
+          var c = string.charAt(i);
+          if (string.indexOf(c) == i && string.indexOf(c, i + 1) == -1) {
+            return c;
+          }
+        }
+        return null;
+      }
+      return firstNonRepeatedCharacter(str);
 }
 
 
@@ -209,7 +255,10 @@ function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
  * 'noon' => 'noon'
  */
 function reverseString(str) {
-    throw new Error('Not implemented');
+    function reverseString(str) {
+        return str.split("").reverse().join("");
+    }
+    return reverseString(str);
 }
 
 
@@ -226,7 +275,12 @@ function reverseString(str) {
  *   34143 => 34143
  */
 function reverseInteger(num) {
-    throw new Error('Not implemented');
+    function reverse_a_number(n)
+{
+	n = n + "";
+	return n.split("").reverse().join("");
+}
+return reverse_a_number(num);
 }
 
 
@@ -251,7 +305,25 @@ function reverseInteger(num) {
  *   4916123456789012 => false
  */
 function isCreditCardNumber(ccn) {
-    throw new Error('Not implemented');
+    function validate_creditcardnumber(inputNum) {       
+        var digit, digits, flag, sum, _i, _len;
+        flag = true;
+        sum = 0;
+        digits = (inputNum + '').split('').reverse();        
+        for (_i = 0, _len = digits.length; _i < _len; _i++) {       
+          digit = digits[_i];      
+          digit = parseInt(digit, 10);          
+          if ((flag = !flag)) {                      
+            digit *= 2;               
+          }
+          if (digit > 9) {               
+            digit -= 9;                    
+          }      
+          sum += digit;          
+        }    
+        return sum % 10 === 0;
+      };
+return validate_creditcardnumber(ccn);
 }
 
 
@@ -270,7 +342,20 @@ function isCreditCardNumber(ccn) {
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
 function getDigitalRoot(num) {
-    throw new Error('Not implemented');
+    function digital_root(n) {
+        var z = n.toString(),
+            i,
+            y = 0;
+    
+        if (z.length === 1) {
+            return +z;
+        }
+        for (i = 0; i < z.length; i++) {
+            y += +z[i];
+        }
+        return digital_root(y);
+    }
+       return digital_root(num);
 }
 
 
@@ -297,6 +382,33 @@ function getDigitalRoot(num) {
  */
 function isBracketsBalanced(str) {
     throw new Error('Not implemented');
+    function isValid(str) {
+
+        if (str.length <= 1)
+          return false
+      
+        let matchingOpeningBracket, ch
+        let stack = []
+      
+        let openingBrackets = ['[', '{', '(']
+        let closingBrackets = [']', '}', ')']
+      
+        for (let i = 0; i < str.length; i++) {
+          ch = str[i]
+      
+          if (closingBrackets.indexOf(ch) > -1) {
+            matchingOpeningBracket = openingBrackets[closingBrackets.indexOf(ch)]
+            if (stack.length == 0 || (stack.pop() != matchingOpeningBracket)) {
+              return false
+            }
+          } else {
+            stack.push(ch)
+          }
+        }
+      
+        return (stack.length == 0)
+      };
+      return isValid(str);
 }
 
 
@@ -374,6 +486,20 @@ function toNaryString(num, n) {
  */
 function getCommonDirectoryPath(pathes) {
     throw new Error('Not implemented');
+    const splitStrings = (a, sep = '/') => a.map(i => i.split(sep));
+ 
+    const elAt = i => a => a[i];
+
+    const rotate = a => a[0].map((e, i) => a.map(elAt(i)));
+     
+    const allElementsEqual = arr => arr.every(e => e === arr[0]);
+     
+    const commonPath = (input, sep = '/') => rotate(splitStrings(input, sep))
+        .filter(allElementsEqual).map(elAt(0)).join(sep);
+     
+    
+    return commonPath(pathes);
+
 }
 
 
@@ -396,7 +522,22 @@ function getCommonDirectoryPath(pathes) {
  *
  */
 function getMatrixProduct(m1, m2) {
-    throw new Error('Not implemented');
+    function multiply(a, b) {
+        var aNumRows = a.length, aNumCols = a[0].length,
+            bNumRows = b.length, bNumCols = b[0].length,
+            m = new Array(aNumRows);  // initialize array of rows
+        for (var r = 0; r < aNumRows; ++r) {
+          m[r] = new Array(bNumCols); // initialize the current row
+          for (var c = 0; c < bNumCols; ++c) {
+            m[r][c] = 0;             // initialize the current cell
+            for (var i = 0; i < aNumCols; ++i) {
+              m[r][c] += a[r][i] * b[i][c];
+            }
+          }
+        }
+        return m;
+      }
+      return multiply(m1,m2);
 }
 
 
