@@ -411,12 +411,10 @@ function getFalsyValuesCount(arr) {
  *    [ true, 0, 1, 'true' ], true => 1
  */
 function findAllOccurences(arr, item) {
-   var dataset = [2,2,4,2,6,4,7,8];
-var search = 2;
 
-var count = arr.reduce(function(n, val) {
-    return n + (val === item);
-}, 0);
+   var count = arr.reduce(function(n, val) {
+      return n + (val === item);
+   }, 0);
 
 return count;
 }
@@ -587,7 +585,23 @@ function distinct(arr) {
  *   }
  */
 function group(array, keySelector, valueSelector) {
-   throw new Error('Not implemented');
+
+  function groupBy(list, keyGetter,valueSelector) {
+   const map = new Map();
+   list.map((item) => {
+        const key = keyGetter(item);
+        const val = valueSelector(item);
+        const collection = map.get(key);
+        if (!collection) {
+            map.set(key, [val]);
+        } else {
+            collection.push(val);
+        }
+   });
+   return map;
+}
+ var x = groupBy(array, keySelector,valueSelector);
+ return x;
 }
 
 
@@ -603,7 +617,12 @@ function group(array, keySelector, valueSelector) {
  *   ['one','two','three'], x=>x.split('')  =>   ['o','n','e','t','w','o','t','h','r','e','e']
  */
 function selectMany(arr, childrenSelector) {
-    throw new Error('Not implemented');
+   throw new Error('Not implemented');
+   var ar =[];
+    arr.map((v,i,a)=>
+    v.map((v,i,e)=>ar.push(childrenSelector(v)))
+    );
+    return ar;
 }
 
 
@@ -643,9 +662,15 @@ function getElementByIndexes(arr, indexes) {
  * 
  */
 function swapHeadAndTail(arr) {
-     throw new Error('Not implemented');
 
-}
+    return  arr.map((v,i,a) => {
+      if(i<arr.length/2){
+      var x = i;
+      var y = arr.length-1;
+      a.splice(y, 1, a.splice(x, 1, a[y])[0]);
+      }
+            });
+      }
 
 
 module.exports = {

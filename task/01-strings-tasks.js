@@ -206,18 +206,21 @@ function extractEmails(str) {
  */
 function getRectangleString(width, height) {
 
-    throw new Error('Not implemented');
+     throw new Error('Not implemented');
     
-    var horizontalLine = '_';
-    var verticalLine = '|';
+    var horizontalLine = '─';
+    var verticalLine = '│';
     var space = ' ';
     var newLine = '\n';
     var finalString = '';
 
     for (var h = 1; h <= height; h++)
     {
-        if (h == 1 || h == height) {
-            finalString = finalString + horizontalLine.repeat(width) + newLine;
+        if (h == 1) {
+            finalString = finalString +"┌"+ horizontalLine.repeat(width-2)+"┐" + newLine;
+        }
+        if (h == height) {
+            finalString = finalString +"└"+ horizontalLine.repeat(width-2)+"┘" + newLine;
         }
         else
         {

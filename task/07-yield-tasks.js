@@ -34,6 +34,23 @@
  */
 function* get99BottlesOfBeer() {
     throw new Error('Not implemented');
+    var arr = []
+    var word = "bottles";
+    var count = 99;
+    while (count > 0) {
+        arr.push(count + " " + word + " of beer on the wall");
+        arr.push(count + " " + word + " of beer,");
+        arr.push("Take one down, pass it around,");
+        count = count - 1;
+        if (count > 1) {
+            arr.push(count + " " + count + " of beer on the wall.");
+        } else if(count == 1) {
+            arr.push(count + " bottle of beer on the wall."); 
+        } else {
+            arr.push("No more " + word + " of beer on the wall.");
+        }
+    }
+    return arr;
 }
 
 
