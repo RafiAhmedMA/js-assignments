@@ -62,11 +62,12 @@ function getJSON(obj) {
  *
  */
 function fromJSON(proto, json) {
-    throw new Error('Not implemented');
-    const body = json;
-    const obj = JSON.parse(body);
-     proto  = obj;
-    return proto;
+     throw new Error('Not implemented');
+    // const body = json;
+    // const obj = JSON.parse(body);
+    //  proto  = obj;
+    // return proto;
+
 }
 
 

@@ -173,7 +173,7 @@ function partialUsingArguments(fn) {
  *   getId10() => 11
  */
 function getIdGeneratorFunction(startFrom) {
-    throw new Error('Not implemented');
+    return '_' + Math.random().toString(36).substr(2, 9);
 }
 
 

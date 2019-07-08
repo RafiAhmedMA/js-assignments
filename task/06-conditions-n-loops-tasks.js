@@ -30,7 +30,14 @@
  *
  */
 function getFizzBuzz(num) {
-    throw new Error('Not implemented');
+    if(num%3==0 && num%5==0)
+    return "FizzBuzz"
+    else if(num%3==0)
+    return "Fizz"
+    else if(num%5==0)
+    return "Buzz" 
+    else
+    return num
 }
 
 
@@ -187,7 +194,15 @@ function doRectanglesOverlap(rect1, rect2) {
  *   
  */
 function isInsideCircle(circle, point) {
-    throw new Error('Not implemented');
+  function check_a_point(a, b, x, y, r) {
+    var dist_points = (a - x) * (a - x) + (b - y) * (b - y);
+    r *= r;
+    if (dist_points < r) {
+        return true;
+    }
+    return false;
+}
+return check_a_point(point.x, point.y, circle.center.x, circle.center.y, circle.radius)
 }
 
 
@@ -238,7 +253,26 @@ function findFirstSingleChar(str) {
  *
  */
 function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
-    throw new Error('Not implemented');
+   var result = ""
+   if (a>b)
+   {
+    a=a+b;     
+    b=a-b;      
+    a=a-b;
+var temp = isStartIncluded;
+isStartIncluded = isEndIncluded;
+isEndIncluded = temp
+   }
+   if(isStartIncluded)
+   result+= "["+a+", "+b
+   else
+   result+= "("+a+", "+b
+   if(isEndIncluded)
+   result+="]"
+   else
+   result+=")"
+
+   return result;
 }
 
 
@@ -381,34 +415,31 @@ function getDigitalRoot(num) {
  *   '{[(<{[]}>)]}' = true 
  */
 function isBracketsBalanced(str) {
-    throw new Error('Not implemented');
-    function isValid(str) {
-
-        if (str.length <= 1)
-          return false
-      
-        let matchingOpeningBracket, ch
-        let stack = []
-      
-        let openingBrackets = ['[', '{', '(']
-        let closingBrackets = [']', '}', ')']
-      
-        for (let i = 0; i < str.length; i++) {
-          ch = str[i]
-      
-          if (closingBrackets.indexOf(ch) > -1) {
-            matchingOpeningBracket = openingBrackets[closingBrackets.indexOf(ch)]
-            if (stack.length == 0 || (stack.pop() != matchingOpeningBracket)) {
-              return false
-            }
-          } else {
-            stack.push(ch)
+    // throw new Error('Not implemented');
+    function parenthesesAreBalanced(string) {
+      var parentheses = "[]{}()<>",
+        stack = [],
+        i, character, bracePosition;
+    
+      for(i = 0; character = string[i]; i++) {
+        bracePosition = parentheses.indexOf(character);
+    
+        if(bracePosition === -1) {
+          continue;
+        }
+    
+        if(bracePosition % 2 === 0) {
+          stack.push(bracePosition + 1); // push next expected brace position
+        } else {
+          if(stack.length === 0 || stack.pop() !== bracePosition) {
+            return false;
           }
         }
-      
-        return (stack.length == 0)
-      };
-      return isValid(str);
+      }
+    
+      return stack.length === 0;
+    }
+      return parenthesesAreBalanced(str);
 }
 
 
@@ -444,7 +475,7 @@ function isBracketsBalanced(str) {
  *
  */
 function timespanToHumanString(startDate, endDate) {
-    throw new Error('Not implemented');
+     throw new Error('Not implemented');
 }
 
 
@@ -468,7 +499,7 @@ function timespanToHumanString(startDate, endDate) {
  *    365, 10 => '365'
  */
 function toNaryString(num, n) {
-    throw new Error('Not implemented');
+    return (num >>> 0).toString(n);
 }
 
 
@@ -485,7 +516,7 @@ function toNaryString(num, n) {
  *   ['/web/favicon.ico', '/web-scripts/dump', '/webalizer/logs'] => '/'
  */
 function getCommonDirectoryPath(pathes) {
-    throw new Error('Not implemented');
+     throw new Error('Not implemented');
     const splitStrings = (a, sep = '/') => a.map(i => i.split(sep));
  
     const elAt = i => a => a[i];
